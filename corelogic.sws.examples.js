@@ -1,10 +1,7 @@
-sws-integration-nodejs
-======================
+#!/usr/bin/env node
 
-Sample NodeJS code demonstrating integration and consumption of CoreLogic Spatial Web Services
+/*
 
-License
-======================
  Copyright (c) 2013, CoreLogic, Inc. All rights reserved.
  Redistribution and use in source and binary forms, with or without modification, are permitted
  provided that the following conditions are met:
@@ -31,4 +28,34 @@ License
  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
+
+*/
+
+var sws = require("./corelogic.sws.examples.module");
+
+sws.hostOptions.host = "sws.corelogic.com";
+sws.hostOptions.port = "80";
+
+var username = "";
+var password = "";
+
+if(!username || !password) {
+    console.log("\n** Update the values of the username and password variables in order to authenticate **\n");
+}
+
+sws.authenticate(username, password, function(error, authenticationResponse) {
+    if(error) {
+        console.log("Error: " + error.message);
+        console.log(JSON.stringify(authenticationResponse, null, 2))
+
+        process.exit();
+    }else {
+        console.log("Attempting geocode using authKey " + authenticationResponse.authKey + " ...");
+
+        sws.geocode(authenticationResponse.authKey, "11902 Burnet Road", "Austin, TX, 78758", true, function(error, geocodeResponse) {
+            console.log(JSON.stringify(geocodeResponse, null, 2))
+        });
+    }
+
+});
 
