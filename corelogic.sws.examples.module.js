@@ -102,23 +102,21 @@ function authenticate(username, password, callback) {
 }
 
 /**
- * Performs a Geocode query against CoreLogic Spatial Solutions using the given authkey, address line, city line, and detail parameters.
+ * Performs a Geocode query against CoreLogic Spatial Solutions using the given authkey, address line, and city line parameters.
  * Callback is executed on success or failure. In the case of success, the error object will be null and the jsonResponse object will
  * be populated. In the case of failure, the error object will populated and the jsonResponse object will be null.
  *
  * @param authkey
  * @param addressline
  * @param cityline
- * @param detail
  * @param callback
  *
  */
-function geocode(authKey, addressline, cityline, detail, callback) {
-    var unencodedUrl = "/api/geocode?address=$addressline&city=$cityLine&detail=$detail&authKey=$authKey";
+function geocode(authKey, addressline, cityline, callback) {
+    var unencodedUrl = "/api/geocode?address=$addressline&city=$cityLine&authKey=$authKey";
     var url = "/api/geocode" +
               "?address=" + encodeURIComponent(addressline) +
               "&city=" + encodeURIComponent(cityline) +
-              "&detail=" + (detail ? "true" : "false") +
               "&authKey=" + authKey;
 
     var requestOptions = getRequestOptions(url, "GET");

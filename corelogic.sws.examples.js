@@ -52,7 +52,7 @@ sws.authenticate(username, password, function(error, authenticationResponse) {
     }else {
         console.log("Attempting geocode using authKey " + authenticationResponse.authKey + " ...");
 
-        sws.geocode(authenticationResponse.authKey, "11902 Burnet Road", "Austin, TX, 78758", true, function(error, geocodeResponse) {
+        sws.geocode(authenticationResponse.authKey, "11902 Burnet Road", "Austin, TX, 78758", function(error, geocodeResponse) {
             console.log(JSON.stringify(geocodeResponse, null, 2))
         });
     }
