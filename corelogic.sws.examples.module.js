@@ -75,7 +75,7 @@ function authenticate(username, password, callback) {
         "password": password
     });
 
-    var requestOptions = getRequestOptions("/api/authenticate", "POST");
+    var requestOptions = getRequestOptions("/api/v3.0.0/authenticate", "POST");
 
     console.log("SWS Authentication URL  : [POST] http://" + requestOptions.host + requestOptions.path);
 
@@ -113,8 +113,8 @@ function authenticate(username, password, callback) {
  *
  */
 function geocode(authKey, addressline, cityline, callback) {
-    var unencodedUrl = "/api/geocode?address=$addressline&city=$cityLine&authKey=$authKey";
-    var url = "/api/geocode" +
+    var unencodedUrl = "/api/v3.0.0/geocode?address=$addressline&city=$cityLine&authKey=$authKey";
+    var url = "/api/v3.0.0/geocode" +
               "?address=" + encodeURIComponent(addressline) +
               "&city=" + encodeURIComponent(cityline) +
               "&authKey=" + authKey;
